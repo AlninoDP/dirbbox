@@ -1,4 +1,8 @@
 import 'package:dirbbox/views/login_page/widgets/background.dart';
+import 'package:dirbbox/views/login_page/widgets/header_icon.dart';
+import 'package:dirbbox/views/login_page/widgets/sign_in_button.dart';
+import 'package:dirbbox/views/login_page/widgets/smart_id_button.dart';
+import 'package:dirbbox/views/login_page/widgets/social_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -17,28 +21,19 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 90,
                 ),
-                Container(
-                  height: 189,
-                  width: 171,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/dirbbox_icon.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                const HeaderIcon(),
                 const SizedBox(
                   height: 30,
                 ),
-                Text(
+                const Text(
                   'Welcome to',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
                 ),
-                Text(
+                const Text(
                   'Dirbbox',
                   style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 220,
                   child: Text(
                     "Best cloud storage platform for all business and individuals to manage there data \n\nJoin For Free.",
@@ -49,27 +44,61 @@ class LoginPage extends StatelessWidget {
                   height: 30,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 26),
-                            backgroundColor:
-                                const Color(0xff567DF4).withOpacity(0.4)),
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset('assets/images/finger_print_icon.png'),
-                            const Text(
-                              'Smart Id',
-                              style: TextStyle(
-                                  fontSize: 16, color: Color(0xff567DF4)),
-                            )
-                          ],
-                        ))
+                    SmartIdButton(
+                      onTap: () {},
+                    ),
+                    SignInButton(
+                      onTap: () {},
+                    ),
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const Center(
+                  child: Text(
+                    'Use Social Login',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SocialButton(
+                      onTap: () {
+                        print('Test Button1');
+                      },
+                      child: Image.asset(
+                        'assets/images/ig_logo.png',
+                      ),
+                    ),
+                    SocialButton(
+                        onTap: () {
+                          print('Test Button2');
+                        },
+                        child: Image.asset('assets/images/twitter_logo.png')),
+                    SocialButton(
+                        onTap: () {
+                          print('Test Button3');
+                        },
+                        child: Image.asset('assets/images/fb_logo.png')),
+                  ],
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                Center(
+                    child: GestureDetector(
+                  onTap: () {
+                    print('Test Create Account');
+                  },
+                  child: const Text('Create An Account'),
+                )),
               ],
             ),
           ),
