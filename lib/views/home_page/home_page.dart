@@ -80,7 +80,10 @@ class HomePage extends StatelessWidget {
                 child: GridView.builder(
               itemCount: storageList.storages.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20),
+                  crossAxisCount: 2,
+                  mainAxisExtent: 140,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20),
               itemBuilder: (context, index) {
                 return StorageContainer(
                     containerColor: storageList.storages[index].containerColor!,

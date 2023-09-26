@@ -15,8 +15,6 @@ class StorageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 107,
-      width: 148,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: containerColor,
@@ -31,7 +29,7 @@ class StorageContainer extends StatelessWidget {
               Icon(
                 Icons.folder,
                 color: color,
-                size: 50,
+                size: 60,
               ),
               const Icon(
                 Icons.more_vert,
