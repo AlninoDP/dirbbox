@@ -1,6 +1,8 @@
 import 'package:dirbbox/viewmodels/storage_viewmodel.dart';
+import 'package:dirbbox/views/home_page/widgets/dropdown_timestamp.dart';
 import 'package:dirbbox/views/home_page/widgets/grid_button.dart';
-import 'package:dirbbox/views/home_page/widgets/storage_container.dart';
+import 'package:dirbbox/views/home_page/widgets/grid_menu.dart';
+import 'package:dirbbox/views/home_page/widgets/list_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storageList = Provider.of<StorageViewModel>(context);
+    final storageViewModel = Provider.of<StorageViewModel>(context);
     return SafeArea(
         child: Scaffold(
       body: Padding(
@@ -65,33 +67,40 @@ class HomePage extends StatelessWidget {
               height: 30,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.menu,
-                    size: 30,
-                  ),
-                ),
-                GridButton(icon: Icons.window_outlined)
+                DropdownTimestamp(viewModel: storageViewModel),
+                Row(
+                  children: [
+                    GridButton(
+                      icon: Icons.menu,
+                      storageViewModel: storageViewModel,
+                      color: storageViewModel.isListMenu
+                          ? const Color(0xff22215B)
+                          : const Color(0xffB0C0D0),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    GridButton(
+                      icon: Icons.window_outlined,
+                      storageViewModel: storageViewModel,
+                      color: storageViewModel.isListMenu
+                          ? const Color(0xffB0C0D0)
+                          : const Color(0xff22215B),
+                    )
+                  ],
+                )
               ],
             ),
             Expanded(
-                child: GridView.builder(
-              itemCount: storageList.storages.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisExtent: 140,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20),
-              itemBuilder: (context, index) {
-                return StorageContainer(
-                    containerColor: storageList.storages[index].containerColor!,
-                    color: storageList.storages[index].color,
-                    date: storageList.storages[index].storageDate,
-                    tittle: storageList.storages[index].storageTittle);
-              },
-            ))
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: storageViewModel.isListMenu
+                    ? ListMenu(storageViewModel: storageViewModel)
+                    : GridMenu(storageViewModel: storageViewModel),
+              ),
+            )
           ],
         ),
       ),

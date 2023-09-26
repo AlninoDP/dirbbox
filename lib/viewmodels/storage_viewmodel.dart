@@ -2,6 +2,12 @@ import 'package:dirbbox/models/storage.dart';
 import 'package:flutter/material.dart';
 
 class StorageViewModel extends ChangeNotifier {
+  bool isListMenu = false;
+  void changeMenuToList() {
+    isListMenu = !isListMenu;
+    notifyListeners();
+  }
+
   List<Storage> storages = [
     Storage(
       id: 1,
@@ -52,4 +58,11 @@ class StorageViewModel extends ChangeNotifier {
       color: const Color(0xff23B0B0),
     ),
   ];
+
+  List<String> timeStamp = ['Recent', 'Newest', 'Oldest'];
+  String? selectedTimeStamp = 'Recent';
+  void setSelectedTimeStamp(String? timeStamp) {
+    selectedTimeStamp = timeStamp;
+    notifyListeners();
+  }
 }
