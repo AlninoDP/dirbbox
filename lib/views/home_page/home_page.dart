@@ -1,4 +1,6 @@
 import 'package:dirbbox/viewmodels/storage_viewmodel.dart';
+import 'package:dirbbox/viewmodels/user_profile_viewmodel.dart';
+import 'package:dirbbox/views/home_page/widgets/drawer/header_drawer.dart';
 import 'package:dirbbox/views/home_page/widgets/dropdown_timestamp.dart';
 import 'package:dirbbox/views/home_page/widgets/grid_button.dart';
 import 'package:dirbbox/views/home_page/widgets/grid_menu.dart';
@@ -12,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final storageViewModel = Provider.of<StorageViewModel>(context);
+    final userProfileViewModel = Provider.of<UserProfileViewModel>(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -111,7 +114,16 @@ class HomePage extends StatelessWidget {
               Icons.add,
               color: Color(0xffffffff),
             )),
-        drawer: Drawer(),
+        drawer: Drawer(
+          backgroundColor: const Color(0xffF1F3F6),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderDrawer(userProfileViewModel: userProfileViewModel)
+            ],
+          ),
+        ),
+        drawerEdgeDragWidth: MediaQuery.of(context).size.width,
       ),
     );
   }
